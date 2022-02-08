@@ -3,9 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//Connection 객체의 참조값 얻어오기 
-	Connection conn=new DbcpBean().getConn();
-%>    
+	Connection conn=new DbcpBean().getConn();    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,19 +13,10 @@
 </head>
 <body>
 	<h1>DB 연결 테스트 결과</h1>
-	<%if(conn != null){ %>
-		<p>DB 연결이 잘 됩니다.</p>
+	<%if(conn!=null){ %>
+		<p>DB 연결 성공</p>
 	<%}else{ %>
 		<p>DB 연결 실패</p>
 	<%} %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

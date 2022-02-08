@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/member/insertform.jsp</title>
+<title>/member/insert.jsp</title>
 </head>
 <body>
 <div class="container">
-	<h1>회원 추가 양식</h1>
-	<form action="insert.jsp" method="post">
+	<h1>회원 추가하기</h1>
+	<form action="insert.jsp" method="get">
 		<div>
 			<label for="name">이름</label>
-			<input type="text" name="name" id="name"/>
+			<input type="text" name="name" id="name" />
 		</div>
 		<div>
 			<label for="addr">주소</label>
