@@ -34,9 +34,11 @@
 </head>
 <body>
 	<%if(added!=false){ %>
-		<p class="alert alert-success">회원 추가 완료 <a href="list.jsp">목록보기</a></p>
+		<p class="alert alert-success">회원 추가 완료 
+		<a class="alert-link" href="list.jsp">목록보기</a></p>
 	<%}else{ %>
-		<p class="alert alert-success">회원 추가 실패 <a href="insertform.jsp">다시 시도</a></p>
+		<p class="alert alert-danger">회원 추가 실패 
+		<a class="alert-link" href="insertform.jsp">다시 시도</a></p>
 	<%} %>
 </body>
 </html>
