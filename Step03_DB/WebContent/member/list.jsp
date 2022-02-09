@@ -22,7 +22,7 @@
 	
 	<h1>회원 목록 입니다.</h1>
 	<table>
-		<thead>
+		<thead> 
 			<tr>
 				<th>번호</th>
 				<th>이름</th>

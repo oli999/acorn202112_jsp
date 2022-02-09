@@ -21,7 +21,7 @@
 	dto.setAddr(addr);
 
 //3. 작업 성공여부를 응답하기
-	Boolean added=dao.insert(dto);
+	boolean added=dao.insert(dto);
 	System.out.println(added);
 %>
 <!DOCTYPE html>

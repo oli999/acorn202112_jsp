@@ -1,4 +1,4 @@
-<%@page import="test.member.dto.MemberDto"%>
+ <%@page import="test.member.dto.MemberDto"%>
 <%@page import="test.member.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,10 +20,10 @@
 	MemberDto dto= new MemberDto();
 	dto.setNum(num);
 	dto.setName(name);
-	dto.setAddr(addr);
+	dto.setAddr(addr); 
 
 //3. 작업 성공여부를 응답하기
-	Boolean updated=dao.update(dto);
+	boolean updated=dao.update(dto);
 %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@
 	<%if(updated!=false){ %>
 		<p>회원 정보 수정 완료 <a href="list.jsp">목록보기</a></p>
 	<%}else{ %>
-		<p>회원 정보 수정 실패 <a href="updateform.jsp">다시 시도</a></p>
+		<p>회원 정보 수정 실패 <a href="updateform.jsp?num=<%=num%>">다시 시도</a></p>
 	<%} %>
 </body>
 </html>
