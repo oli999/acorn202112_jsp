@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_ajax4.html</title>
+</head>
+<body>
+    <h1>ajax 요청을 통해서 받아온 데이터 사용하기</h1>
+    <div id="app">
+        <input type="text" v-model="inputName" placeholder="이름 입력...">
+        <input type="text" v-model="inputAddr" placeholder="주소 입력...">
+        <button @click="addClicked">추가</button>
+        <br>
+        <input type="text" 
+            v-model="keyword" @input="inputed"
+            placeholder="찾을 이름 입력...">
+        <br>
+        <table>
+        	<thead>
+        		<tr>
+        			<th>번호</th>
+        			<th>이름</th>
+        			<th>주소</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr v-for="tmp in currentMembers" v-bind:key="tmp.num">
+        			<td>{{tmp.num}}</td>
+        			<td>{{tmp.name}}</td>
+        			<td>{{tmp.addr}}</td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        let app=new Vue({
+            el:"#app",
+            data:{
+            	members:[],
+                currentMembers:[],
+                keyword:"",
+                inputName:"",
+                inputAddr:""
+            },
+            methods:{
+                addClicked(){
+                    const self=this;
+
+                    //서버에 전송할 formData 구성
+                    const formData=new FormData();
+                    formData.append("name", this.inputName);
+                    formData.append("addr", this.inputAddr);
+
+                    //입력한 이름과 주소를 post 방식으로 서버에 ajax 전송
+                    axios.post("http://localhost:8888/spring03/api/member/insert.do", formData)
+                    .then(function(response){
+                        if(response.status == 200){
+                            //목록을 다시 요청 하도록 해서 원본 회원목록 업데이트 하기 
+                            self.getMembers();
+                        }
+                    });
+                },
+                getMembers(){
+                    //회원목록을 서버에 요청해서 응답되면 화면을 업데이트 한다.
+                    //this 즉 Vue 객체의 참조값을 self 라는 상수에 담기
+                    const self=this;
+
+                    // axios 라이브러리를 이용해서 get 방식 요청하기 
+                    axios.get("http://localhost:8888/spring03/api/member/list.do")
+                    .then(function(response){
+
+                        //만일 성공적인 응답이라면
+                        if(response.status == 200){
+                            //응답 객체의 data 라는 방에 응답된 데이터가 들어 있다.
+                            self.members=response.data;
+                            //검색 작업을 한번 더 한다.
+                            self.inputed();
+                        }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });	
+                },
+                inputed(){
+                    /*
+                        filter() 함수는 배열에서 특정 아이템만 남겨진 새로운 배열을 리턴한다.
+                    */
+                    this.currentMembers = this.members.filter(item => -1 != item.name.indexOf(this.keyword));
+                }
+            },
+            // root component 가 준비가 되었을때 호출되는 함수 
+            created(){
+                //무언가 준비 작업을 여기서 하면된다. 
+                console.log("created!");
+                //회원목록을 서버에 요청해서 응답되면 화면을 업데이트 한다.
+                //this 즉 Vue 객체의 참조값을 self 라는 상수에 담기
+                const self=this;
+
+                // axios 라이브러리를 이용해서 get 방식 요청하기 
+                axios.get("http://localhost:8888/spring03/api/member/list.do")
+                .then(function(response){
+                    //응답 객체
+                    console.log(response);
+                    //만일 성공적인 응답이라면
+                    if(response.status == 200){
+                        //응답 객체의 data 라는 방에 응답된 데이터가 들어 있다.
+                        self.members=response.data;
+                        self.currentMembers=response.data;
+                    }
+                })
+                .catch(function(error){
+                    console.log(error);
+                });	
+                
+            }
+        });
+    </script>
+</body>
+</html>

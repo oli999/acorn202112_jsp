@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step10_this.html</title>
+</head>
+<body>
+    <h1>this 에 대한 이해</h1>
+    <script>
+        let car1={
+            brand:"현대",
+            showInfo:function(){
+                let result = car1 == this;
+                console.log("제조사:"+this.brand);
+            }
+        };
+
+        let car2={
+            brand:"기아",
+            showInfo:()=>{
+                console.log("제조사:"+this.brand);
+            }
+        }
+
+        let obj={
+            brand:"삼성",
+            car:{
+                showInfo:()=>{
+                    console.log(this);
+                    console.log("제조사:"+this.brand);
+                }
+            }
+        };
+        
+    </script>
+</body>
+</html>

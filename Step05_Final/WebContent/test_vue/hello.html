@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/test_vue/hello.html</title>
+</head>
+<body>
+	<h1>vue js 사용해 보기</h1>
+	<div id="app">
+		<p>오늘의 운세 : {{ fortune }}</p>
+		<button v-on:click="clicked">눌러보셈</button>
+		<ul>
+			<li v-for="item in [10,20,30]">{{item}}</li>
+		</ul>
+		
+		<input type="text" v-model="msg"/>
+		<p>{{msg}}</p>
+		
+		<input type="checkbox" v-model="isChecked"/>
+		<p v-bind:class="{'is-valid':isChecked, 'is-invalid':!isChecked}">김구라</p>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				fortune:"동쪽으로 가면 귀인을 만나요",
+				msg:"",
+				isChecked:false
+			},
+			methods:{
+				clicked:function(){
+					this.fortune="오후에 시험을 보게 될거에요!";
+				}
+			}
+		});
+		
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step12_computed2.html</title>
+</head>
+<body>
+    <h1>computed 계산된 속성(모델) 테스트</h1>
+    <div id="app">
+        <button @click="car.brand='기아'">클릭하셈</button>
+        <p>getBrand() : {{getBrand()}}</p>
+        <p>carBrand : {{carBrand}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let app=new Vue({
+            el:"#app",
+            data:{
+                car:{brand:"현대"}
+            },
+            methods:{
+                getBrand(){
+                    return this.car.brand;
+                }
+            },
+            //종속된 모델에 변경이 있을때 호출되는 함수
+            //무조건 호출이 되는게 아니기 때문에 필요없는 연산을 줄여주는 역활을 한다. 
+            //변경이 없을때는 미리 계산된(computed) 값을 사용한다.  
+            computed:{
+               carBrand(){
+                   return this.car.brand;
+               }
+            }
+        });
+    </script>
+</body>
+</html>
